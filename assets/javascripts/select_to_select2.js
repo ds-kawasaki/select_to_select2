@@ -50,8 +50,9 @@ function replaceAllSelect2(){
                 placeholder: "",
             });
         }
-        else if (elements[i].id == 'available_c' || elements[i].id == 'select_c') {
-            // Avoid to render select columns option, because of the columm is selected by option not selected attribute.
+        else if (elements[i].id == 'available_c' || elements[i].id == 'selected_c' || elements[i].style.display == 'none') {
+            // Avoid to render available/selected columns option, because of the columm is selected by option not selected attribute.
+            // Avoid to render hidden option because select2 will not apply the display:none to the style of the span.
         }
         else {
             // For All Pages
