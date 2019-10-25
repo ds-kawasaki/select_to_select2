@@ -67,10 +67,11 @@ function replaceAllSelect2(){
      || elements[i].id == 'month'
      || elements[i].id == 'columns'
      || elements[i].id == 'settings_issuequery_query_id'
-     || elements[i].id == 'block-select'){
+     || elements[i].id == 'block-select'
+     || elements[i].id == 'group_by'){
 
           $("#" + elements[i].id).select2({
-               width:"175px",
+               width: "175px",
                placeholder: ""
           });
      }
