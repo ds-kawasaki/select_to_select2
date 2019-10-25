@@ -36,27 +36,23 @@ function replaceAllSelect2(){
 
     var elements = document.getElementsByTagName("select");
 	
-    // Known ids to ignore because of display issue (summarized as available_ and selected_ ): 
+    // Known ids to ignore because of wrong display issue (summarized as available_ and selected_ ): 
     // available_c, selected_c, 
     // available_settings_issue_list_default_columns, selected_settings_issue_list_default_columns, 
     // available_settings_time_entry_list_defaults_column_names, selected_settings_time_entry_list_defaults_column_names
 	
-    // Known ids to ignore because of display issue: 
+    // Known ids to ignore because these fields should list all available values: 
     // settings_issue_status_x, settings_issue_status_y, 
     // settings_issue_assign_to_x, 
     // settings_issue_auto_assign_status, settings_issue_auto_assign_role, 
     // settings_issue_timelog_required_tracker, settings_issue_timelog_required_status, 
-	
-    // Known ids to ignore to avoid conflict with site javascript:
-    // issue_assigned_to_id, issue_category_id, 
 	
     var ignoredids = [ 
     "available_", "selected_", 
     "settings_issue_status_x", "settings_issue_status_y", 
     "settings_issue_assign_to_x", 
     "settings_issue_auto_assign_status", "settings_issue_auto_assign_role", 
-    "settings_issue_timelog_required_tracker", "settings_issue_timelog_required_status", 
-    "issue_assigned_to_id", "issue_category_id"
+    "settings_issue_timelog_required_tracker", "settings_issue_timelog_required_status"
      ];
 
     for (i = 0; i < elements.length; i++) {
@@ -66,7 +62,7 @@ function replaceAllSelect2(){
           indexofsum = indexofsum + elements[i].id.indexOf(ignoredids[j]);
      }
 
-     // For not woroking 「width:resolve」
+     // For not woroking [width:resolve]
      if(elements[i].id == 'year'
      || elements[i].id == 'month'
      || elements[i].id == 'columns'
@@ -78,9 +74,12 @@ function replaceAllSelect2(){
                placeholder: ""
           });
      }
-     else if (indexofsum + ignoredids.length > 0 || elements[i].style.display == 'none') {
+     else if (indexofsum + ignoredids.length > 0 || elements[i].style.display == 'none' || (elements[i].id == 'issue_assigned_to_id' && elements[i].value == '')) {
      // Avoid to render ignored items.
      // Avoid to render hidden option because select2 will not apply the display:none to the style of the span.
+     // Avoid to render empty issue_assigned_to_id,
+     // because Category default assignee script app\views\issues\new.js will generate to default assignee_id to select option with empty value "" and just display the name.
+     // and only render it after user sets a value, at that case new.js will not update the value again.
      }
      else {
      // For All Pages
