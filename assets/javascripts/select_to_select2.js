@@ -20,7 +20,7 @@
     // for all elements
     // click event only for toggle to multiple select
     $(document).click(function(event){
-        if (event.target.tagName === 'A' || event.target.className === 'toggle-multiselect') replaceAllSelect2();
+        if (event.target.tagName === 'A' || event.target.className === 'toggle-multiselect' || event.target.getAttribute("onclick").indexOf("toggle") >= 0) replaceAllSelect2();
     });
 
     // for all elements
