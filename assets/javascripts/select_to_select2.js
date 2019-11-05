@@ -72,7 +72,8 @@ function replaceAllSelect2(){
 
           $("#" + elements[i].id).select2({
                placeholder: "", 
-               width: "175px",
+               width: "175px", 
+               // Use allowClear to let users to set empty value for fields, because select2 will hideemptyplacehold, which the empty option is used in original select box for empty value.
                allowClear: true
           });
      }
@@ -88,6 +89,7 @@ function replaceAllSelect2(){
      $("#" + elements[i].id).select2({
           placeholder: "", 
 	  width: "resolve", 
+          // Use allowClear to let users to set empty value for fields, because select2 will hideemptyplacehold, which the empty option is used in original select box for empty value.
           allowClear: true
      });
      }
