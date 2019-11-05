@@ -20,7 +20,7 @@
     // for all elements
     // click event only for toggle to multiple select
     $(document).click(function(event){
-        if (event.target.tagName === 'A' || event.target.className === 'toggle-multiselect' || event.target.getAttribute("onclick").indexOf("toggle") >= 0) replaceAllSelect2();
+        if (event.target.tagName === 'A' || /toggle/i.test(event.target.className) || event.target.getAttribute("onclick")) replaceAllSelect2();
     });
 
     // for all elements
@@ -71,8 +71,9 @@ function replaceAllSelect2(){
      || elements[i].id == 'group_by'){
 
           $("#" + elements[i].id).select2({
+               placeholder: "", 
                width: "175px",
-               placeholder: ""
+               allowClear: true
           });
      }
      else if (indexofsum + ignoredids.length > 0 || elements[i].style.display == 'none' || (elements[i].id == 'issue_assigned_to_id' && elements[i].value == '')) {
@@ -85,8 +86,9 @@ function replaceAllSelect2(){
      else {
      // For All Pages
      $("#" + elements[i].id).select2({
-          width: "resolve", 
-          placeholder: ""
+          placeholder: "", 
+	  width: "resolve", 
+          allowClear: true
      });
      }
 
