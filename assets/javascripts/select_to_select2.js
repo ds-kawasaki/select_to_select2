@@ -57,7 +57,7 @@ function replaceAllSelect2(){
     // settings_issue_timelog_required_tracker, settings_issue_timelog_required_status, 
 	
 	    var ignoredids = [ 
-	    "available_", "selected_", 
+	    "available_", "selected_", "permissions_", 
 	    "settings_issue_status_x", "settings_issue_status_y", 
 	    "settings_issue_assign_to_x", 
 	    "settings_issue_auto_assign_status", "settings_issue_auto_assign_role", 
