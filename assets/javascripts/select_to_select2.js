@@ -57,7 +57,7 @@ function replaceAllSelect2(){
     // settings_issue_timelog_required_tracker, settings_issue_timelog_required_status, 
 	
 	    var ignoredids = [ 
-	    "available_", "selected_", "permissions_", 
+	    "available_", "selected_", "permissions_", "edit_tag_style", 
 	    "settings_issue_status_x", "settings_issue_status_y", 
 	    "settings_issue_assign_to_x", 
 	    "settings_issue_auto_assign_status", "settings_issue_auto_assign_role", 
@@ -96,7 +96,7 @@ function replaceAllSelect2(){
         else if (elements[i].hasAttribute("multiple")) {
             // For Multiple Select
             $("#" + elements[i].id).select2({
-                placeholder: "", 
+                placeholder: "Multi-select", 
 				width: "resolve", 
 				// Keep select2 opening for multiple value select, after changes made. 
 				// Better for user to select different values, don't need to scroll again, don't need to input the filter keyword again. 
