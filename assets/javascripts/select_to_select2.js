@@ -34,7 +34,7 @@
 	// To compatible with "closeOnSelect: false"
 	// Only trigger the replace before select2 is closing, instead of changed, and aotu close single value select after select but keep opened for multiple value select
 	// https://select2.org/programmatic-control/events
-	$(document).on('select2:close', function (event) {
+	$(document).on('select2:closing', function (event) {
 		replaceAllSelect2();
 	});
 	
