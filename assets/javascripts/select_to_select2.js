@@ -50,6 +50,8 @@ function replaceAllSelect2(){
     // available_settings_issue_list_default_columns, selected_settings_issue_list_default_columns, 
     // available_settings_time_entry_list_defaults_column_names, selected_settings_time_entry_list_defaults_column_names
 	
+	// Known ids to ignore because of performance: summarized as permissions_
+	
     // Known ids to ignore because these fields should list all available values: 
     // settings_issue_status_x, settings_issue_status_y, 
     // settings_issue_assign_to_x, 
@@ -57,7 +59,7 @@ function replaceAllSelect2(){
     // settings_issue_timelog_required_tracker, settings_issue_timelog_required_status, 
 	
 	    var ignoredids = [ 
-	    "available_", "selected_", "permissions_", "edit_tag_style", 
+	    "available_", "selected_", "permissions_", 
 	    "settings_issue_status_x", "settings_issue_status_y", 
 	    "settings_issue_assign_to_x", 
 	    "settings_issue_auto_assign_status", "settings_issue_auto_assign_role", 
@@ -66,12 +68,20 @@ function replaceAllSelect2(){
 
     for (i = 0; i < elements.length; i++) {
 		
-	    indexofsum = 0;
+	    var indexofsum = 0;
 	    for (j = 0; j < ignoredids.length; j++) {
 	        indexofsum = indexofsum + elements[i].id.indexOf(ignoredids[j]);
 	    }
+		
+		var strPlaceholder = "";
+		$("#" + elements[i].id + " option").each(function() {
+			if (!this.value) {
+				strPlaceholder = this.text;
+				return false;
+			};
+		});
 
-        // For not woroking [width:resolve]
+        // For not working [width:resolve]
         if(elements[i].id == 'year'
         || elements[i].id == 'month'
         || elements[i].id == 'columns'
@@ -80,37 +90,39 @@ function replaceAllSelect2(){
 		|| elements[i].id == 'group_by'){
 
             $("#" + elements[i].id).select2({
-                placeholder: "", 
 				width: "175px", 
-				// Use allowClear to let users to set empty value for fields, because select2 will hideemptyplacehold, which the empty option is used in original select box for empty value.
+                placeholder: strPlaceholder, 
+				// Use allowClear to let users to set empty value for fields, because select2 will hideemptyplaceholder, so we use the text of empty value option as placeholder, which the empty option is used in original select box for default value.
 				allowClear: true
             });
         }
-		else if (indexofsum + ignoredids.length > 0 || elements[i].style.display == 'none' || (elements[i].id == 'issue_assigned_to_id' && elements[i].value == '')) {
+		else if (indexofsum + ignoredids.length > 0 || elements[i].style.display == 'none') {
+		//else if (indexofsum + ignoredids.length > 0 || elements[i].style.display == 'none' || (elements[i].id == 'issue_assigned_to_id' && elements[i].value == '')) {
             // Avoid to render ignored items.
 			// Avoid to render hidden option because select2 will not apply the display:none to the style of the span.
-			// Avoid to render empty issue_assigned_to_id,
-			// because Category default assignee script app\views\issues\new.js will generate to default assignee_id to select option with empty value "" and just display the name.
-			// and only render it after user sets a value, at that case new.js will not update the value again.
+			// No need now because of dynamic placeholder is created with empty value: ----- Avoid to render empty issue_assigned_to_id,
+			// No need now because of dynamic placeholder is created with empty value: ----- because Category default assignee script app\views\issues\new.js will generate to default assignee_id to select option with empty value "" and just display the name.
+			// No need now because of dynamic placeholder is created with empty value: ----- and only render it after user sets a value, at that case new.js will not update the value again.
         }
         else if (elements[i].hasAttribute("multiple")) {
             // For Multiple Select
             $("#" + elements[i].id).select2({
-                placeholder: "Multi-select", 
 				width: "resolve", 
+				// No empty value option will be used in multiple select
+                placeholder: "Multi-select", 
 				// Keep select2 opening for multiple value select, after changes made. 
 				// Better for user to select different values, don't need to scroll again, don't need to input the filter keyword again. 
 				closeOnSelect: false, 
-				// Use allowClear to let users to set empty value for fields, because select2 will hideemptyplacehold, which the empty option is used in original select box for empty value.
+				// Use allowClear to let users to set empty value for fields, because select2 will hideemptyplaceholder, so we use the text of empty value option as placeholder, which the empty option is used in original select box for default value.
 				allowClear: true
             });
         }
         else {
             // For all others
             $("#" + elements[i].id).select2({
-                placeholder: "", 
 				width: "resolve", 
-				// Use allowClear to let users to set empty value for fields, because select2 will hideemptyplacehold, which the empty option is used in original select box for empty value.
+                placeholder: strPlaceholder, 
+				// Use allowClear to let users to set empty value for fields, because select2 will hideemptyplaceholder, so we use the text of empty value option as placeholder, which the empty option is used in original select box for default value.
 				allowClear: true
             });
         }
