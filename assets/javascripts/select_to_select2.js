@@ -50,7 +50,7 @@ function replaceAllSelect2(){
     // available_settings_issue_list_default_columns, selected_settings_issue_list_default_columns, 
     // available_settings_time_entry_list_defaults_column_names, selected_settings_time_entry_list_defaults_column_names
 	
-	// Known ids to ignore because of performance: summarized as permissions_
+    // Known ids to ignore because of performance: summarized as permissions_, transitions_
 	
     // Known ids to ignore because these fields should list all available values: 
     // settings_issue_status_x, settings_issue_status_y, 
@@ -59,7 +59,7 @@ function replaceAllSelect2(){
     // settings_issue_timelog_required_tracker, settings_issue_timelog_required_status, 
 	
 	    var ignoredids = [ 
-	    "available_", "selected_", "permissions_", "transitions_", "role_", 
+	    "available_", "selected_", "permissions_", "transitions_", "role_", "tracker_", 
 	    "settings_issue_status_x", "settings_issue_status_y", 
 	    "settings_issue_assign_to_x", 
 	    "settings_issue_auto_assign_status", "settings_issue_auto_assign_role", 
@@ -98,7 +98,7 @@ function replaceAllSelect2(){
         }
 		else if (indexofsum + ignoredids.length > 0 || elements[i].style.display == 'none') {
 		//else if (indexofsum + ignoredids.length > 0 || elements[i].style.display == 'none' || (elements[i].id == 'issue_assigned_to_id' && elements[i].value == '')) {
-            // Avoid to render ignored items.
+		// Avoid to render ignored items.
 			// Avoid to render hidden option because select2 will not apply the display:none to the style of the span.
 			// No need now because of dynamic placeholder is created with empty value: ----- Avoid to render empty issue_assigned_to_id,
 			// No need now because of dynamic placeholder is created with empty value: ----- because Category default assignee script app\views\issues\new.js will generate to default assignee_id to select option with empty value "" and just display the name.
