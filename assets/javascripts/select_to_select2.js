@@ -74,7 +74,9 @@ function replaceAllSelect2(){
 	    }
 		
 		var strPlaceholder = "";
+        var hasEmptyText = false;
 		$("#" + elements[i].id + " option").each(function() {
+            if (this.text == "") { hasEmptyText = true; }
 			if (!this.value) {
 				strPlaceholder = this.text;
 				return false;
@@ -93,7 +95,7 @@ function replaceAllSelect2(){
 				width: "175px", 
                 placeholder: strPlaceholder, 
 				// Use allowClear to let users to set empty value for fields, because select2 will hideemptyplaceholder, so we use the text of empty value option as placeholder, which the empty option is used in original select box for default value.
-				allowClear: true
+				allowClear: hasEmptyText
             });
         }
 		else if (indexofsum + ignoredids.length > 0 || elements[i].style.display == 'none') {
@@ -114,7 +116,7 @@ function replaceAllSelect2(){
 				// Better for user to select different values, don't need to scroll again, don't need to input the filter keyword again. 
 				closeOnSelect: false, 
 				// Use allowClear to let users to set empty value for fields, because select2 will hideemptyplaceholder, so we use the text of empty value option as placeholder, which the empty option is used in original select box for default value.
-				allowClear: true
+				allowClear: hasEmptyText
             });
         }
         else {
@@ -123,7 +125,7 @@ function replaceAllSelect2(){
 				width: "resolve", 
                 placeholder: strPlaceholder, 
 				// Use allowClear to let users to set empty value for fields, because select2 will hideemptyplaceholder, so we use the text of empty value option as placeholder, which the empty option is used in original select box for default value.
-				allowClear: true
+				allowClear: hasEmptyText
             });
         }
 
