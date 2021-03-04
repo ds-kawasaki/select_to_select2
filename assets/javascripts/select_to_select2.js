@@ -74,9 +74,9 @@ function replaceAllSelect2(){
 	    }
 		
 		var strPlaceholder = "";
-        var hasEmptyText = false;
+		var hasEmptyText = false;
 		$("#" + elements[i].id + " option").each(function() {
-            if (this.text == "") { hasEmptyText = true; }
+			if (!this.text.trim()) { hasEmptyText = true; }
 			if (!this.value) {
 				strPlaceholder = this.text;
 				return false;
